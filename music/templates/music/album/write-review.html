@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}write a review for {{ album.name }}{% endblock %}
+
+{% block content %}
+    <div class="row justify-content-center">
+        <div class="col-6">
+            <h2>{{ album.name }}</h2>
+            <form action="{% url 'music:write_review' form.album.value %}" method="post">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+{% endblock %}

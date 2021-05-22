@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ album.name }}{% endblock %}
+
+{% block content %}
+    <h2>{{ album.name }}</h2>
+    <h3>Personel</h3>
+    <ul>
+        <li>
+
+        </li>
+    </ul>
+    {% if review %}
+        <h4>Your review</h4>
+        <p>{{ review.content }}</p>
+        <a href="{% url 'music:update_review' album.id %}">Modify your review</a>
+    {% else %}
+        <a href="{% url 'music:write_review' album.id %}">Write a review</a>
+    {% endif %}
+{% endblock %}

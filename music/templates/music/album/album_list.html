@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}albums{% endblock %}
+
+{% block content %}
+<h2>Albums</h2>
+{% if albums %}
+    {% for album in albums %}
+        <div>
+            <h3><a href="{% url 'music:album_details' album.id %}">{{ album.name }}</a></h3>
+            {% if album.review %}
+            <a href="{% url 'music:update_review' album.id %}">Your rating: {{ album.review.rating }}</a>
+            {% endif %}
+
+        </div>
+    {% endfor %}
+{% else %}
+    <p>No album yet!</p>
+{% endif %}
+
+{% endblock %}
