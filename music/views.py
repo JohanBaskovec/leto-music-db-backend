@@ -1,12 +1,80 @@
+import django_filters
+from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from django.views import generic
+from django_filters import BaseInFilter, NumberFilter, FilterSet
+from rest_framework import viewsets, mixins, permissions, views
+from rest_framework.response import Response
 
 from music.forms import AlbumReviewForm
-from music.models import Album, AlbumReview
+from music.models import Album, AlbumReview, Artist, Band, ArtistBandMembership
+from music.permissions import IsAuthorOrReadOnly
+from music.serializers import AlbumReviewSerializer, ArtistSerializer, BandSerializer, \
+    AlbumSerializer, ArtistBandMembershipSerializer
 
 
+# REST
+
+class GetMyReviews(mixins.ListModelMixin, viewsets.GenericViewSet):
+    serializer_class = AlbumReviewSerializer
+
+
+class AlbumViewSet(viewsets.ModelViewSet):
+    queryset = Album.objects.all()
+    serializer_class = AlbumSerializer
+    # serializer_classes = {
+    #    'create': AlbumCreateUpdateSerializer,
+    #    'update': AlbumCreateUpdateSerializer,
+    # }
+    # default_serializer_class = AlbumViewSerializer # Your default serializer
+
+    # def get_serializer_class(self):
+    #    return self.serializer_classes.get(self.action, self.default_serializer_class)
+
+
+class ArtistSet(viewsets.ModelViewSet):
+    queryset = Artist.objects.all()
+    serializer_class = ArtistSerializer
+
+
+class BandSet(viewsets.ModelViewSet):
+    queryset = Band.objects.all()
+    serializer_class = BandSerializer
+
+
+class ArtistBandMembershipSet(viewsets.ModelViewSet):
+    queryset = ArtistBandMembership.objects.all()
+    serializer_class = ArtistBandMembershipSerializer
+
+
+class NumberInFilter(BaseInFilter, NumberFilter):
+    pass
+
+
+class AlbumReviewFilter(FilterSet):
+    album__in = NumberInFilter(field_name='album')
+
+    class Meta:
+        model = AlbumReview
+        fields = ['author']
+
+
+class AlbumReviewSet(viewsets.ModelViewSet):
+    queryset = AlbumReview.objects.all()
+    serializer_class = AlbumReviewSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly,
+                          IsAuthorOrReadOnly]
+
+    def perform_create(self, serializer):
+        serializer.save(author=self.request.user)
+
+    filter_backends = [django_filters.rest_framework.DjangoFilterBackend]
+    filterset_class = AlbumReviewFilter
+
+
+# HTML
 def index(request):
     return render(request, 'music/index.html')
 

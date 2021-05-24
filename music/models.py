@@ -49,8 +49,8 @@ class Band(models.Model):
 
 
 class ArtistBandMembership(models.Model):
-    artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
-    band = models.ForeignKey(Band, on_delete=models.CASCADE)
+    artist = models.ForeignKey(Artist, on_delete=models.CASCADE, related_name='band_memberships')
+    band = models.ForeignKey(Band, on_delete=models.CASCADE, related_name='artist_memberships')
     start_date = models.DateField(null=False, blank=False)
     end_date = models.DateField(null=True, blank=True)
 
@@ -118,8 +118,8 @@ class AlbumReview(models.Model):
     rating = models.IntegerField(validators=[MinValueValidator(0),
                                              MaxValueValidator(100)])
     publication_date = models.DateTimeField(auto_now_add=True)
-    author = models.ForeignKey(to=User, on_delete=models.CASCADE)
-    album = models.ForeignKey(to=Album, on_delete=models.CASCADE)
+    author = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name='album_reviews')
+    album = models.ForeignKey(to=Album, on_delete=models.CASCADE, related_name='reviews')
 
     def __str__(self):
         return 'Review by "{}" of the album "{}" made on {}'.format(self.author.username,
