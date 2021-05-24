@@ -37,7 +37,7 @@ class CurrentUserDetail(APIView):
     # we must add this property otherwise the OpenAPI schema will
     # assume this path returns an array of objects
     # see is_list_view in rest_framework/schemas/utils.py
-    action = 'list'
+    action = 'retrieve'
 
     def get(self, request):
         serializer = UserSerializer(request.user)

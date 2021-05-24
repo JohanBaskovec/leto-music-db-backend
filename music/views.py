@@ -6,6 +6,7 @@ from django.urls import reverse
 from django.views import generic
 from django_filters import BaseInFilter, NumberFilter, FilterSet
 from rest_framework import viewsets, mixins, permissions, views
+from rest_framework.authentication import TokenAuthentication
 from rest_framework.response import Response
 
 from music.forms import AlbumReviewForm
@@ -66,7 +67,6 @@ class AlbumReviewSet(viewsets.ModelViewSet):
     serializer_class = AlbumReviewSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly,
                           IsAuthorOrReadOnly]
-
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
 
