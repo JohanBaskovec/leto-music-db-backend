@@ -1,11 +1,9 @@
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from django.http import HttpResponse
 from django.shortcuts import render, redirect
-
-# REST API
-from rest_framework import mixins, viewsets, generics
+from rest_framework import mixins, viewsets, parsers
+from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.response import Response
 from rest_framework.schemas.openapi import AutoSchema
 from rest_framework.views import APIView
@@ -13,6 +11,7 @@ from rest_framework.views import APIView
 from django_test.serializers import UserSerializer
 
 
+# REST API
 class UserList(mixins.ListModelMixin, viewsets.GenericViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
@@ -45,6 +44,12 @@ class CurrentUserDetail(APIView):
 
     def get_serializer(self, *args, **kwargs):
         return UserSerializer(*args, **kwargs)
+
+
+# We must redefine the parse_classes otherwise the generated JS client is wrong,
+# it will generate methods to submit Form Data instead of JSON
+class CustomObtainAuthToken(ObtainAuthToken):
+    parser_classes = (parsers.JSONParser,)
 
 
 # HTML

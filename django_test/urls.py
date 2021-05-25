@@ -19,6 +19,7 @@ from rest_framework import routers
 from rest_framework.authtoken.views import obtain_auth_token
 
 from django_test import views
+from django_test.views import CustomObtainAuthToken
 
 router = routers.DefaultRouter()
 router.register(r'users', views.UserList)
@@ -34,5 +35,5 @@ urlpatterns = [
     path('accounts/profile/', views.profile),
     path('accounts/', include('django.contrib.auth.urls')),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    path('api-token-auth/', obtain_auth_token),
+    path('api-token-auth/', CustomObtainAuthToken.as_view()),
 ]

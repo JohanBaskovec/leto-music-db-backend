@@ -13,8 +13,9 @@ class CustomSchemaGenerator(SchemaGenerator):
             "Authorization": {
                 "type": "apiKey",
                 "in": "header",
-                "name": "Authentication"
+                "name": "Authorization"
             }
         }
         schema["security"] = [{"Authorization": []}]
+
         return schema
