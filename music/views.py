@@ -17,6 +17,9 @@ from music.serializers import AlbumReviewSerializer, ArtistSerializer, BandSeria
 
 
 # REST
+class NumberInFilter(BaseInFilter, NumberFilter):
+    pass
+
 
 class GetMyReviews(mixins.ListModelMixin, viewsets.GenericViewSet):
     serializer_class = AlbumReviewSerializer
@@ -35,23 +38,40 @@ class AlbumViewSet(viewsets.ModelViewSet):
     #    return self.serializer_classes.get(self.action, self.default_serializer_class)
 
 
+class ArtistFilter(FilterSet):
+    id__in = NumberInFilter(field_name='id')
+
+    class Meta:
+        model = Artist
+        fields = ['id']
+
+
 class ArtistSet(viewsets.ModelViewSet):
     queryset = Artist.objects.all()
     serializer_class = ArtistSerializer
+
+    filter_backends = [django_filters.rest_framework.DjangoFilterBackend]
+    filterset_class = ArtistFilter
+
+
+class BandFilter(FilterSet):
+    id__in = NumberInFilter(field_name='id')
+
+    class Meta:
+        model = Band
+        fields = ['id']
 
 
 class BandSet(viewsets.ModelViewSet):
     queryset = Band.objects.all()
     serializer_class = BandSerializer
+    filter_backends = [django_filters.rest_framework.DjangoFilterBackend]
+    filterset_class = BandFilter
 
 
 class ArtistBandMembershipSet(viewsets.ModelViewSet):
     queryset = ArtistBandMembership.objects.all()
     serializer_class = ArtistBandMembershipSerializer
-
-
-class NumberInFilter(BaseInFilter, NumberFilter):
-    pass
 
 
 class AlbumReviewFilter(FilterSet):
@@ -67,6 +87,7 @@ class AlbumReviewSet(viewsets.ModelViewSet):
     serializer_class = AlbumReviewSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly,
                           IsAuthorOrReadOnly]
+
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
 

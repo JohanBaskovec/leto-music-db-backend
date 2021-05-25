@@ -632,6 +632,24 @@
             "schema": {
               "type": "integer"
             }
+          },
+          {
+            "name": "id",
+            "required": false,
+            "in": "query",
+            "description": "id",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id__in",
+            "required": false,
+            "in": "query",
+            "description": "id__in",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -717,6 +735,24 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "id",
+            "required": false,
+            "in": "query",
+            "description": "id",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id__in",
+            "required": false,
+            "in": "query",
+            "description": "id__in",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -744,6 +780,24 @@
             "in": "path",
             "required": true,
             "description": "A unique integer value identifying this artist.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "required": false,
+            "in": "query",
+            "description": "id",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id__in",
+            "required": false,
+            "in": "query",
+            "description": "id__in",
             "schema": {
               "type": "string"
             }
@@ -786,6 +840,24 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "id",
+            "required": false,
+            "in": "query",
+            "description": "id",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id__in",
+            "required": false,
+            "in": "query",
+            "description": "id__in",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "requestBody": {
@@ -825,6 +897,24 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "id",
+            "required": false,
+            "in": "query",
+            "description": "id",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id__in",
+            "required": false,
+            "in": "query",
+            "description": "id__in",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -849,6 +939,24 @@
             "description": "A page number within the paginated result set.",
             "schema": {
               "type": "integer"
+            }
+          },
+          {
+            "name": "id",
+            "required": false,
+            "in": "query",
+            "description": "id",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id__in",
+            "required": false,
+            "in": "query",
+            "description": "id__in",
+            "schema": {
+              "type": "string"
             }
           }
         ],
@@ -935,6 +1043,24 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "id",
+            "required": false,
+            "in": "query",
+            "description": "id",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id__in",
+            "required": false,
+            "in": "query",
+            "description": "id__in",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -962,6 +1088,24 @@
             "in": "path",
             "required": true,
             "description": "A unique integer value identifying this band.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "required": false,
+            "in": "query",
+            "description": "id",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id__in",
+            "required": false,
+            "in": "query",
+            "description": "id__in",
             "schema": {
               "type": "string"
             }
@@ -1004,6 +1148,24 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "id",
+            "required": false,
+            "in": "query",
+            "description": "id",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id__in",
+            "required": false,
+            "in": "query",
+            "description": "id__in",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "requestBody": {
@@ -1040,6 +1202,24 @@
             "in": "path",
             "required": true,
             "description": "A unique integer value identifying this band.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "required": false,
+            "in": "query",
+            "description": "id",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id__in",
+            "required": false,
+            "in": "query",
+            "description": "id__in",
             "schema": {
               "type": "string"
             }
